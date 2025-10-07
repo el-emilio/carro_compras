@@ -92,12 +92,21 @@ export default function Fusion() {
 
     const eliminar = (id) => {
         const productsInCarCopy = [...productsInCar]
-        const productsCopy = products.find((prod) => (prod.id == id))
-
+        
+        
         setProductsInCar(productsInCarCopy.filter((prod) => (prod.id != id)))
-
-        productsCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad + productsInCarCopy.length : prod))
+        
+        const product = productsInCar.find((prod) => (prod.id == id))
+        const productsCopy=[...products]
+        productsCopy.map((prod)=>(prod.id==id? prod.cantidad=prod.cantidad+product.cantidad:prod))
+        
         setProducts(productsCopy)
+        
+
+        
+
+        //productsCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad + productsInCarCopy.length : prod))
+        //setProducts(productsCopy)
 
     }
 
@@ -105,7 +114,7 @@ export default function Fusion() {
 
     return (
         <div>
-            <AgregarItem></AgregarItem>
+            <AgregarItem setProducts={setProducts} products={products}></AgregarItem>
             <Catlog products={products} onClick={agregar}></Catlog>
             <Carrito products={productsInCar} onClick={eliminar}></Carrito>
         </div>
