@@ -33,12 +33,18 @@ export default function Fusion() {
         //Agregar elemento cuando el carrito esta vacío
         if (productsInCar.length < 1) {
 
-            const productsInCarCopy = [...productsInCar, { ...product, cantidad: 1 }]
-            setProductsInCar(productsInCarCopy)
+            if (product.cantidad > 0) {
+                const productsInCarCopy = [...productsInCar, { ...product, cantidad: 1 }]
+                setProductsInCar(productsInCarCopy)
 
-            //Resta la cantidad al catalogo
-            productsCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad - 1 : prod))
-            setProducts(productsCopy)
+                //Resta la cantidad al catalogo
+                productsCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad - 1 : prod))
+                setProducts(productsCopy)
+            }
+
+            else {
+                console.log("Hasta aquí")
+            }
         }
 
         //Agregar elemento cuando el carrito no esta vacío
@@ -48,21 +54,35 @@ export default function Fusion() {
             const productsInCarCopy = [...productsInCar]
 
             if (productInCar) {
-                //Resta cantidad en catalogo
-                productsCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad - 1 : prod))
-                setProducts(productsCopy)
+                if (product.cantidad > 0) {
+                    //Resta cantidad en catalogo
+                    productsCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad - 1 : prod))
+                    setProducts(productsCopy)
 
-                //Suma cantidad en carrito
-                productsInCarCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad + 1 : prod))
-                setProductsInCar(productsInCarCopy)
+                    //Suma cantidad en carrito
+                    productsInCarCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad + 1 : prod))
+                    setProductsInCar(productsInCarCopy)
+                }
+
+                else {
+                    console.log("Hasta aquí")
+                }
+
             }
 
             else {
-                productsCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad - 1 : prod))
-                setProducts(productsCopy)
+                if (product.cantidad > 0) {
+                    productsCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad - 1 : prod))
+                    setProducts(productsCopy)
 
-                const productsInCarCopy = [...productsInCar, { ...product, cantidad: 1 }]
-                setProductsInCar(productsInCarCopy)
+                    const productsInCarCopy = [...productsInCar, { ...product, cantidad: 1 }]
+                    setProductsInCar(productsInCarCopy)
+                }
+
+                else {
+                    console.log("Hasta aquí")
+                }
+
 
             }
 
@@ -76,9 +96,8 @@ export default function Fusion() {
 
         setProductsInCar(productsInCarCopy.filter((prod) => (prod.id != id)))
 
-        productsCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad + productsInCarCopy.cantidad : prod))
+        productsCopy.map((prod) => (prod.id == id ? prod.cantidad = prod.cantidad + productsInCarCopy.length : prod))
         setProducts(productsCopy)
-
 
     }
 
