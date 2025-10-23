@@ -1,8 +1,9 @@
 import React from "react";
+import { useProductos } from "../context/productos";
 
+export default function Catlog() {
 
-export default function Catlog({products, onClick}) {
-
+    const{products, agregar}=useProductos();
 
 
     return (
@@ -15,7 +16,7 @@ export default function Catlog({products, onClick}) {
                             <h1 className='my-2'>{product.nombre}</h1>
                             <p className='text-gray-600'>{product.descripcion}</p>
                             <p className='text-gray-400'>Cantidad: {product.cantidad}</p>
-                            <button onClick={()=>onClick(product.id)} className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-400 focus:outline-none focus:ring-2 active:bg-amber-400 focus:ring-blue-300 mt-2">
+                            <button onClick={()=>agregar(product.id)} className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-400 focus:outline-none focus:ring-2 active:bg-amber-400 focus:ring-blue-300 mt-2">
                                 Agregar
                             </button>
                         </div>

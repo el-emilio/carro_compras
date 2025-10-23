@@ -1,7 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
+import { useProductos } from '../context/productos'
 
-export default function AgregarItem({setProducts, products}) {
+export default function AgregarItem() {
+
+    const {tema, products, setProducts}=useProductos();
 
     const [visible, setVisible] = useState(false)
 
@@ -26,7 +29,7 @@ export default function AgregarItem({setProducts, products}) {
     return (
         <div className='flex justify-center' >
             <div className='flex justify-center border-gray-500 w-8/12 bg-white m-2 gap-2 rounded'>
-                <p>Agregar Equipo</p>
+                <p>Agregar Equipo {tema}</p>
             </div>
             <div className='flex justify-center'>
                 <button onClick={() => setVisible(!visible)} className='cursor-pointer'>{visible ? "⬇️" : "⬆️"}</button>
